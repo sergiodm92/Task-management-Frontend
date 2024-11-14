@@ -1,7 +1,15 @@
-```markdown
-# Task Management Frontend
+## Task Management Frontend
 
-Este es el frontend para la aplicación de gestión de tareas. La aplicación permite a los usuarios registrarse, iniciar sesión, crear etiquetas(Tags), crear una nueva tarea, actualizar tarea, eliminar tarea y filtrar y paginar las tareas, se consideró el manejo de grandes numeros de datos. Está construida con **React**, **TypeScript**, y utiliza **Zustand** para el manejo de estado, junto con **Axios** para la comunicación con la API backend.|
+```markdown
+
+Este es el frontend para la aplicación de gestión de tareas. La aplicación 
+permite a los usuarios registrarse, iniciar sesión, crear etiquetas(Tags), 
+crear una nueva tarea, actualizar tarea, eliminar tarea y filtrar y paginar 
+las tareas, se consideró el manejo de grandes numeros de datos. Está 
+construida con **React**, **TypeScript**, y utiliza **Zustand** para el 
+manejo de estado, junto con **Axios** para la comunicación con la API 
+backend.|
+
 
 ## Principales Tecnologías Usadas
 - **TypeScript** Lenguaje de programación
