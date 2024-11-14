@@ -1,5 +1,3 @@
-Aquí tienes una estructura de README para el frontend de tu proyecto de **Task Management**. Este README cubre aspectos como la instalación, configuración, scripts, estructura del proyecto, y otros detalles importantes.
-
 ```markdown
 # Task Management Frontend
 
