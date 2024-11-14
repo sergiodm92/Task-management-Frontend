@@ -21,6 +21,10 @@ export const createTag = async (tag: CreateTag): Promise<any> => {
         const response = await axiosInstance.post<any>(`/tags`, tag);
         return response.data;
     } catch (error: any) {
+        console.log(error);
+        if (error.status === 409) {
+            alert('Tag already exists');
+        }
         const apiError: ApiError = {
             message: error.response?.data?.message || error.message,
         };

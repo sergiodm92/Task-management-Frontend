@@ -35,6 +35,7 @@ export function Login() {
     } catch (err) {
       setError('Invalid email or password');
     }
+    console.log(data);
   };
 
   return (
@@ -63,8 +64,12 @@ export function Login() {
             {error}
           </Alert>
         )}
-
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault(); 
+            handleSubmit(onSubmit)();
+          }}
+        >
           <TextField
             fullWidth
             label="Email"
