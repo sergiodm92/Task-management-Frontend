@@ -9,7 +9,7 @@ type AuthStore = {
   isAuthenticated: boolean;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   initializeAuth: () => Promise<void>;
 };
@@ -29,7 +29,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         set({ user, isAuthenticated: true, loading: false });
       } catch (error) {
         console.error('Error al inicializar la autenticación:', error);
-        Cookies.remove('token'); 
+        Cookies.remove('token');
         set({ user: null, isAuthenticated: false, loading: false });
       }
     }
@@ -44,8 +44,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
     try {
       const response = await loginApi({ email, password });
       Cookies.set('token', response.data.token, {
-        sameSite: 'lax', 
-        secure: true, 
+        sameSite: 'lax',
+        secure: true,
       });
       const user = response.data.user;
       set({ user, isAuthenticated: true, loading: false });
@@ -59,12 +59,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     set({ loading: true });
     try {
       const response = await registerApi({ email, password });
-      Cookies.set('token', response.data.token, {
-        sameSite: 'lax', 
-        secure: true, 
-      });
-      const user = response.data.user;
-      set({ user, isAuthenticated: true, loading: false });
+      return response.statusCode === 201;
     } catch (error) {
       set({ loading: false });
       throw new Error('Registration failed');
