@@ -59,6 +59,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     set({ loading: true });
     try {
       const response = await registerApi({ email, password });
+      set({loading: false})
       return response.statusCode === 201;
     } catch (error) {
       set({ loading: false });
