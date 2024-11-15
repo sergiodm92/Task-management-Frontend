@@ -51,7 +51,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ user, isAuthenticated: true, loading: false });
     } catch (error) {
       set({ loading: false });
-      throw new Error('Login failed');
+      throw error
     }
   },
 

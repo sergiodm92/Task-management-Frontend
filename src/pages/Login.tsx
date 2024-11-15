@@ -20,7 +20,7 @@ type LoginForm = {
 
 export function Login() {
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
+  const { login, loading } = useAuthStore();
   const [error, setError] = useState('');
   const {
     register,
@@ -30,13 +30,17 @@ export function Login() {
 
   const onSubmit = async (data: LoginForm) => {
     try {
-      await login(data.email, data.password);
-      navigate('/dashboard');
-    } catch (err) {
-      setError('Invalid email or password');
+        await login(data.email, data.password); 
+        navigate('/dashboard'); 
+    } catch (err: any) {
+      console.log(err);
+        if (err.status === 401) {
+            alert('Invalid email or password');
+        }
+        
     }
-    console.log(data);
-  };
+};
+
 
   return (
     <Box
@@ -108,7 +112,7 @@ export function Login() {
             size="large"
             sx={{ mt: 3 }}
           >
-            Sign In
+            {loading ? 'Loading...' : 'Sign In'}
           </Button>
 
           <Box sx={{ mt: 2, textAlign: 'center' }}>

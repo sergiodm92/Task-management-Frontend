@@ -1,6 +1,7 @@
-import { Credentials, UserData, AuthResponse, ApiError, GetUserResponse } from '../interfaces/auth';
+import { Credentials, UserData, AuthResponse, ApiError } from '../interfaces/auth';
 import axiosInstance from '../config/axiosConfig';
 import { User } from '../interfaces';
+import { set } from 'date-fns';
 
 
 export const login = async (credentials: Credentials): Promise<AuthResponse> => {
@@ -8,17 +9,14 @@ export const login = async (credentials: Credentials): Promise<AuthResponse> => 
         const response = await axiosInstance.post<AuthResponse>(`/auth/login`, credentials);
         return response.data;
     } catch (error: any) {
-        const apiError: ApiError = {
-            message: error.response?.data?.message || error.message,
-        };
-        throw apiError;
+        
+        throw error;
     }
 };
 
 export const register = async (userData: UserData): Promise<AuthResponse> => {
     try {
         const response = await axiosInstance.post<AuthResponse>(`/auth/register`, userData);
-        console.log(response.data);
         return response.data;
     } catch (error: any) {
         const apiError: ApiError = {
