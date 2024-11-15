@@ -21,6 +21,7 @@ import { Plus, Pencil, Trash2 } from 'lucide-react';
 import { Tag } from '../interfaces/index';
 import { useForm } from 'react-hook-form';
 import { useTaskStore } from '../store/taskStore';
+import { ConfirmToast } from '../components/ConfirmToast';
 
 type TagFormData = Omit<Tag, 'id'>;
 
@@ -62,10 +63,11 @@ export function TagManagement() {
     handleCloseForm();
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm('Are you sure you want to delete this tag?')) {
-      deleteTag(id);
-    }
+  const handleDelete = (taskId: number) => {
+    ConfirmToast({
+      message: 'Are you sure you want to delete this Tag?',
+      onConfirm: () => deleteTag(taskId),
+    });
   };
 
   return (

@@ -21,6 +21,8 @@ import { TaskForm } from '../components/TaskForm';
 import { useTaskStore } from '../store/taskStore';
 import { Task } from '../interfaces/index';
 import { format } from 'date-fns';
+import toast from 'react-hot-toast';
+import { ConfirmToast } from '../components/ConfirmToast';
 
 export function TaskManagement() {
 
@@ -52,10 +54,12 @@ export function TaskManagement() {
   };
 
   const handleDelete = (taskId: number) => {
-    if (confirm('Are you sure you want to delete this task?')) {
-      deleteTask(taskId, currentPage);
-    }
+    ConfirmToast({
+      message: 'Are you sure you want to delete this task?',
+      onConfirm: () => deleteTask(taskId, currentPage), // Lógica de eliminación
+    });
   };
+  
 
   const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
     updateTasksByPage(newPage);
@@ -237,13 +241,13 @@ export function TaskManagement() {
         )}
       </Card>
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-        { totalPages > 1 &&
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handleChangePage}
-          color="primary"
-        />
+        {totalPages > 1 &&
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handleChangePage}
+            color="primary"
+          />
         }
       </Box>
       <TaskForm
