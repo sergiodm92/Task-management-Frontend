@@ -82,55 +82,63 @@ export function TagManagement() {
       </Box>
 
       <Card>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Color</TableCell>
-                <TableCell width={120}>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {tags.map((tag) => (
-                <TableRow key={tag.id}>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <Box
-                        sx={{
-                          width: 24,
-                          height: 24,
-                          borderRadius: 1,
-                          backgroundColor: tag.color,
-                        }}
-                      />
-                      {tag.name}
-                    </Box>
-                  </TableCell>
-                  <TableCell>{tag.color}</TableCell>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', gap: 1 }}>
-                      <IconButton
-                        size="small"
-                        onClick={() => handleOpenForm(tag)}
-                        color="primary"
-                      >
-                        <Pencil size={20} />
-                      </IconButton>
-                      <IconButton
-                        size="small"
-                        onClick={() => handleDelete(tag.id)}
-                        color="error"
-                      >
-                        <Trash2 size={20} />
-                      </IconButton>
-                    </Box>
-                  </TableCell>
+        {tags.length > 0 ? (
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Color</TableCell>
+                  <TableCell width={120}>Actions</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {tags.map((tag) => (
+                  <TableRow key={tag.id}>
+                    <TableCell>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <Box
+                          sx={{
+                            width: 24,
+                            height: 24,
+                            borderRadius: 1,
+                            backgroundColor: tag.color,
+                          }}
+                        />
+                        {tag.name}
+                      </Box>
+                    </TableCell>
+                    <TableCell>{tag.color}</TableCell>
+                    <TableCell>
+                      <Box sx={{ display: 'flex', gap: 1 }}>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleOpenForm(tag)}
+                          color="primary"
+                        >
+                          <Pencil size={20} />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleDelete(tag.id)}
+                          color="error"
+                        >
+                          <Trash2 size={20} />
+                        </IconButton>
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : (
+          <Box sx={{ textAlign: 'center', p: 4 }}>
+            <Typography variant="h6" color="text.secondary">
+              No tags available. Start by adding a new tag!
+            </Typography>
+          </Box>
+        )}
       </Card>
 
       <Dialog open={openForm} onClose={handleCloseForm}>

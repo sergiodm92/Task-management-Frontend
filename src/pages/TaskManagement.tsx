@@ -155,73 +155,81 @@ export function TaskManagement() {
       </Box>
       <Card>
         {!isLoadingTasks ? (
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Title</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell>Due Date</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Tags</TableCell>
-                  <TableCell width={120}>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {tasks.map((task) => (
-                  <TableRow key={task.id}>
-                    <TableCell>{task.title}</TableCell>
-                    <TableCell>{task.description}</TableCell>
-                    <TableCell>
-                      {format(new Date(task.dueDate), 'MMM dd, yyyy')}
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        label={task.status.replace('_', ' ')}
-                        color={
-                          task.status === 'completed'
-                            ? 'success'
-                            : task.status === 'in_progress'
-                              ? 'warning'
-                              : 'default'
-                        }
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                        {task.tags.map((tag) => (
-                          <Chip
-                            key={tag.id}
-                            label={tag.name}
-                            size="small"
-                            sx={{ backgroundColor: tag.color, color: 'white' }}
-                          />
-                        ))}
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Box sx={{ display: 'flex', gap: 1 }}>
-                        <IconButton
-                          size="small"
-                          onClick={() => handleOpenForm(task)}
-                          color="primary"
-                        >
-                          <Pencil size={20} />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          onClick={() => handleDelete(task.id)}
-                          color="error"
-                        >
-                          <Trash2 size={20} />
-                        </IconButton>
-                      </Box>
-                    </TableCell>
+          tasks.length > 0 ? (
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Title</TableCell>
+                    <TableCell>Description</TableCell>
+                    <TableCell>Due Date</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Tags</TableCell>
+                    <TableCell width={120}>Actions</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {tasks.map((task) => (
+                    <TableRow key={task.id}>
+                      <TableCell>{task.title}</TableCell>
+                      <TableCell>{task.description}</TableCell>
+                      <TableCell>
+                        {format(new Date(task.dueDate), 'MMM dd, yyyy')}
+                      </TableCell>
+                      <TableCell>
+                        <Chip
+                          label={task.status.replace('_', ' ')}
+                          color={
+                            task.status === 'completed'
+                              ? 'success'
+                              : task.status === 'in_progress'
+                                ? 'warning'
+                                : 'default'
+                          }
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                          {task.tags.map((tag) => (
+                            <Chip
+                              key={tag.id}
+                              label={tag.name}
+                              size="small"
+                              sx={{ backgroundColor: tag.color, color: 'white' }}
+                            />
+                          ))}
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Box sx={{ display: 'flex', gap: 1 }}>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleOpenForm(task)}
+                            color="primary"
+                          >
+                            <Pencil size={20} />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleDelete(task.id)}
+                            color="error"
+                          >
+                            <Trash2 size={20} />
+                          </IconButton>
+                        </Box>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          ) : (
+            <Box sx={{ textAlign: 'center', p: 4 }}>
+              <Typography variant="h6" color="text.secondary">
+                No tasks available. Start by adding a new task!
+              </Typography>
+            </Box>
+          )
         ) : (
           <div className="fixed inset-0 flex items-center justify-center bg-primary z-50">
             <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -229,12 +237,14 @@ export function TaskManagement() {
         )}
       </Card>
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+        { totalPages > 1 &&
         <Pagination
           count={totalPages}
           page={currentPage}
           onChange={handleChangePage}
           color="primary"
         />
+        }
       </Box>
       <TaskForm
         open={openForm}
