@@ -35,7 +35,7 @@ export function Login() {
     } catch (err: any) {
       console.log(err);
         if (err.status === 401) {
-            alert('Invalid email or password');
+            setError('Invalid email or password');
         }
         
     }
