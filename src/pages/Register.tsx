@@ -21,7 +21,7 @@ type RegisterForm = {
 
 export function Register() {
   const navigate = useNavigate();
-  const register = useAuthStore((state) => state.register);
+  const {register, loading} = useAuthStore()
   const [error, setError] = useState('');
   const {
     register: registerField,
@@ -126,7 +126,7 @@ export function Register() {
               size="large"
               sx={{ mt: 3 }}
             >
-              Sign Up
+              {loading ? 'Loading...' : 'Sign Up'}
             </Button>
 
             <Box sx={{ mt: 2, textAlign: 'center' }}>
