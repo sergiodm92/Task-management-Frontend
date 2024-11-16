@@ -67,7 +67,7 @@ export function TagManagement() {
     ConfirmToast({
       message: 'Are you sure you want to delete this Tag?',
       onConfirm: () => deleteTag(taskId),
-    });
+    }); 
   };
 
   return (

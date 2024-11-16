@@ -16,6 +16,7 @@ import {
 import { CountTasksState, GetTasksResponse } from '../interfaces/tasks';
 import { CreateTag, GetTagsResponse } from '../interfaces/tags';
 import { CreateTask } from '../interfaces/tasks';
+import toast from 'react-hot-toast';
 
 type TaskStore = {
   tasks: Task[];
@@ -179,9 +180,13 @@ export const useTaskStore = create<TaskStore>((set) => ({
         set((state) => ({
           tags: state.tags.filter((tag) => tag.id !== id),
         }));
+        toast.success('Action completed successfully!');
       }
-    } catch (error) {
-      console.error('Error while deleting tag:', error);
+    } catch (error: any) {
+
+      if (error.status === 405) {
+        toast.error('The tag is being used by a task, please delete the task before deleting the tag');
+      }
     }
   },
 

@@ -21,7 +21,7 @@ export const ConfirmToast = ({ message, onConfirm }: ConfirmToastOptions) => {
           onClick={() => {
             onConfirm(); // Ejecuta la acción
             toast.dismiss(t.id); // Cierra el toast
-            toast.success('Action completed successfully!');
+            
           }}
           style={{
             padding: '6px 12px',

@@ -1,6 +1,7 @@
 import { ApiError } from '../interfaces/auth';
 import axiosInstance from '../config/axiosConfig';
 import { CreateTag, GetTagsResponse } from '../interfaces/tags';
+import toast from 'react-hot-toast';
 
 
 export const getAllTags = async (): Promise<GetTagsResponse> => {
@@ -21,14 +22,7 @@ export const createTag = async (tag: CreateTag): Promise<any> => {
         const response = await axiosInstance.post<any>(`/tags`, tag);
         return response.data;
     } catch (error: any) {
-        console.log(error);
-        if (error.status === 409) {
-            alert('Tag already exists');
-        }
-        const apiError: ApiError = {
-            message: error.response?.data?.message || error.message,
-        };
-        throw apiError;
+      throw error;
     }
 };
 
@@ -50,8 +44,6 @@ export const deleteTag = async (id: number): Promise<any> => {
         const response = await axiosInstance.delete(`/tags/${id}`);
         return response;
     } catch (error: any) {
-        if (error.status === 405) {
-            alert('The tag is being used by a task, please delete the task before deleting the tag');
-        }
+      throw error;
     }
 };
