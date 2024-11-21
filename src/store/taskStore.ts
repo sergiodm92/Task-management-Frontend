@@ -155,13 +155,16 @@ export const useTaskStore = create<TaskStore>((set) => ({
           tags: [...state.tags, response.data],
         }));
       }
-    } catch (error) {
-      console.error('Error while adding tag:', error);
+    } catch (error:any) {
+      if (error.status === 409) {
+        toast.error('The tag name is already in use');
+      }
     }
   },
 
   updateTag: async (id, updatedTag) => {
     try {
+      
       const response = await updateTag(id, updatedTag);
       if (response.statusCode === 200) {
         set((state) => ({

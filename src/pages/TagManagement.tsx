@@ -22,6 +22,7 @@ import { Tag } from '../interfaces/index';
 import { useForm } from 'react-hook-form';
 import { useTaskStore } from '../store/taskStore';
 import { ConfirmToast } from '../components/ConfirmToast';
+import toast from 'react-hot-toast';
 
 type TagFormData = Omit<Tag, 'id'>;
 
@@ -55,6 +56,18 @@ export function TagManagement() {
   };
 
   const onSubmit = (data: TagFormData) => {
+  
+    const normalizedName = data.name.toLowerCase().trim();
+  
+    const isDuplicate = tags.some(
+      (tag) => tag.name.toLowerCase().trim() === normalizedName && tag.id !== selectedTag?.id
+    );
+  
+    if (isDuplicate) {
+      toast.error('A tag with this name already exists. Please choose a different name.');
+      return;
+    }
+  
     if (selectedTag) {
       updateTag(selectedTag.id, data);
     } else {
