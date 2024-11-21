@@ -33,12 +33,7 @@ axiosInstance.interceptors.response.use(
     if (status === 401) {
       Cookies.remove('token');
       window.history.pushState({}, '', '/login');
-    } else if (status === 500) {
-      console.error('Error interno del servidor');
-    } else if (!error.response) {
-      console.error('Error de red o servidor no disponible');
     }
-
     return Promise.reject({
       message: error.response?.data?.message || error.message,
       status: status || 'Network Error',

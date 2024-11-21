@@ -1,7 +1,6 @@
 import { Credentials, UserData, AuthResponse, ApiError } from '../interfaces/auth';
 import axiosInstance from '../config/axiosConfig';
 import { User } from '../interfaces';
-import { set } from 'date-fns';
 
 
 export const login = async (credentials: Credentials): Promise<AuthResponse> => {

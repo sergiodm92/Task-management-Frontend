@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import Cookies from 'js-cookie';
 import { User } from '../interfaces';
 import { login as loginApi, register as registerApi, getUser as getUserApi } from '../api/auth';
-import axiosInstance from '../config/axiosConfig';
 
 type AuthStore = {
   user: User | null;
@@ -23,7 +22,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
     const token = Cookies.get('token');
     if (token) {
       try {
-        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         const response = await getUserApi();
         const user = response.data;
         set({ user, isAuthenticated: true, loading: false });
@@ -59,7 +57,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     set({ loading: true });
     try {
       const response = await registerApi({ email, password });
-      set({loading: false})
+      set({ loading: false })
       return response.statusCode === 201;
     } catch (error) {
       set({ loading: false });

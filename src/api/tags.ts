@@ -1,7 +1,6 @@
 import { ApiError } from '../interfaces/auth';
 import axiosInstance from '../config/axiosConfig';
 import { CreateTag, GetTagsResponse } from '../interfaces/tags';
-import toast from 'react-hot-toast';
 
 
 export const getAllTags = async (): Promise<GetTagsResponse> => {
