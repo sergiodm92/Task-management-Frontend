@@ -18,6 +18,7 @@ export const getAllTasks = async (page: number = 1, limit: number = taskForPage)
     }
 };
 
+
 export const getTasksByTagsAndStatus = async (tags: number[], status: string, page: number = 1, limit: number = taskForPage): Promise<GetTasksResponse> => {
     try {
         // Create the query string for the tags

@@ -26,8 +26,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         const user = response.data;
         set({ user, isAuthenticated: true, loading: false });
       } catch (error) {
-        console.error('Error al inicializar la autenticación:', error);
-        Cookies.remove('token');
+        console.error('initializeAuth error:', error);
         set({ user: null, isAuthenticated: false, loading: false });
       }
     }

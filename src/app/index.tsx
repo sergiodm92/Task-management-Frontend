@@ -3,6 +3,7 @@ import { AppProviders } from './AppProviders';
 import { AppRoutes } from './AppRoutes';
 import { AppInitializer } from './AppInitializer';
 
+
 function App() {
   return (
     <AppProviders>

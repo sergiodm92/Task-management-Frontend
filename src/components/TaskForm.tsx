@@ -44,9 +44,9 @@ export function TaskForm({ open, onClose, onSubmit, initialData, tags }: TaskFor
     defaultValues: {
       title: initialData?.title || '',
       description: initialData?.description || '',
-      dueDate: initialData? (new Date(initialData.dueDate)) : new Date(),
+      dueDate: initialData ? (new Date(initialData.dueDate)) : new Date(),
       status: initialData?.status || 'pending',
-      tags: initialData?.tags.map((tag)=>tag.id) || [],
+      tags: initialData?.tags.map((tag) => tag.id) || [],
     },
   });
 
@@ -56,9 +56,9 @@ export function TaskForm({ open, onClose, onSubmit, initialData, tags }: TaskFor
         {
           title: initialData?.title || '',
           description: initialData?.description || '',
-          dueDate: initialData? (new Date(initialData.dueDate)) : new Date(),
+          dueDate: initialData ? (new Date(initialData.dueDate)) : new Date(),
           status: initialData?.status || 'pending',
-          tags: initialData?.tags.map((tag)=>tag.id) || [],
+          tags: initialData?.tags.map((tag) => tag.id) || [],
         });
     }
   }, [open, initialData, reset]);
@@ -185,7 +185,6 @@ export function TaskForm({ open, onClose, onSubmit, initialData, tags }: TaskFor
                 )}
               />
             </Box>
-
           </Box>
         </DialogContent>
         <DialogActions>
